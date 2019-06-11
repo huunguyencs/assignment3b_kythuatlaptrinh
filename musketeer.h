@@ -46,7 +46,12 @@ class Musketeer {
 
 /* Start block: TO DO
     * You can declare additional methods to complete this assignment
+    
 */
+        void helpMus(int giup,int duocGiup,int quai);
+        void help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4]);
+        void attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4]);
+        bool timCystal(int chisoCystal,int HP[4]);
 
 
 

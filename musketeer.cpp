@@ -73,7 +73,7 @@ void Musketeer::setMemoryManger(MemoryManager* manager) {
     * Input: the team of this musketeer
     * Output: None
 */
-void Musketeer::setTeam(Musketeer* team) {
+void Musketeer::setTeam(Musketeer* team) { 
     this->team = team;
 }
 
