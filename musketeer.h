@@ -52,15 +52,9 @@ class Musketeer {
         void help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4]);
         void attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4]);
         bool timCystal(int chisoCystal,int HP[4]);
-
-
-
-
-
-
-
-
-
+        void taoCystal(int cystal,int preMus,int chisoCystal);
+        void thayCystal(int cystal,int preMus,int chisoCystal);
+        bool tim(int chisoCystal,int HP[4],int NLQ);
 
 
 
