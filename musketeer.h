@@ -48,12 +48,12 @@ class Musketeer {
     * You can declare additional methods to complete this assignment
     
 */
-        void helpMus(int giup,int duocGiup,int quai);
-        void help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4]);
-        void attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4]);
+        void helpMus(int giup,int duocGiup,int quai,bool dungChung[4][3]);
+        void help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4],bool dungChung[4][3]);
+        void attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4],bool dungChung[4][3]);
         bool timCystal(int chisoCystal,int HP[4]);
         void taoCystal(int cystal,int preMus,int chisoCystal);
-        void thayCystal(int cystal,int preMus,int chisoCystal);
+        void thayCystal(int cystal,int preMus,int chisoCystal,bool dungChung[4][3]);
         bool tim(int chisoCystal,int HP[4],int NLQ);
 
 
