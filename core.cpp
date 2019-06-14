@@ -122,7 +122,7 @@ void Musketeer::help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],in
     int mus1=preMus+1; if(mus1>=4) mus1-=4;
     int mus2=preMus+2; if(mus2>=4) mus2-=4;
     int mus3=preMus+3; if(mus3>=4) mus3-=4;
-    if(preMus==0 && team[0].getHP()<HP[0]) { //d'Artagnan hoi phuc HP
+    if(preMus==0 && team[0].getHP()<HP[0] && pause[0]==true) { //d'Artagnan hoi phuc HP
         if(team[0].getHP()+200>HP[0]) {
             team[preMus].setHP(HP[0]); //Da hoi phuc HP ban dau
             pause[preMus]=false;
@@ -131,7 +131,7 @@ void Musketeer::help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],in
             this->team[preMus].setHP(this->team[preMus].getHP()+200); //Neu chua hoi phuc HP ban dau thi tiep tuc +200
         }
     }
-    if(preMus==1 && team[1].getHP()<HP[1]) { //Athos hoi phuc HP
+    if(preMus==1 && team[1].getHP()<HP[1] && pause[1]==true) { //Athos hoi phuc HP
         if(team[1].getHP()+150>HP[1]) {
             team[preMus].setHP(HP[1]); //Da hoi phuc HP ban dau
             pause[preMus]=false;
@@ -140,7 +140,7 @@ void Musketeer::help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],in
             this->team[preMus].setHP(this->team[preMus].getHP()+150); //Neu chua hoi phuc HP ban dau thi tiep tuc +150
         }
     }
-    if(preMus==2 && team[2].getHP()<HP[2]) { //Porthos hoi phuc HP
+    if(preMus==2 && team[2].getHP()<HP[2] && pause[2]==true) { //Porthos hoi phuc HP
         if(team[2].getHP()+100>HP[2]) {
             team[preMus].setHP(HP[2]); //Da hoi phuc HP ban dau
             pause[preMus]=false;
@@ -149,8 +149,8 @@ void Musketeer::help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],in
             this->team[preMus].setHP(this->team[preMus].getHP()+100); //Neu chua hoi phuc HP ban dau thi tiep tuc +100
         }
     }
-    if(preMus==3 && team[3].getHP()<HP[3]) { //Aramis hoi phuc HP
-        if(team[3].getHP()+50>HP[0]) {
+    if(preMus==3 && team[3].getHP()<HP[3] && pause[3]==true) { //Aramis hoi phuc HP
+        if(team[3].getHP()+50>HP[3]) {
             team[preMus].setHP(HP[3]); //Da hoi phuc HP ban dau
             pause[preMus]=false;
         }
@@ -158,31 +158,30 @@ void Musketeer::help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],in
             this->team[preMus].setHP(this->team[preMus].getHP()+50); //Neu chua hoi phuc HP ban dau thi tiep tuc +50
         }
     }
-    if(this->team[mus1].getCystalPointer(chisoCystal) != NULL && !pause[mus1]){ //Neu mus1 co cystal thich hop va ko nghi ngoi
+    if(this->team[mus1].getCystalPointer(chisoCystal) != NULL && pause[mus1]==false){ //Neu mus1 co cystal thich hop va ko nghi ngoi
         int* cystalPointer;
         *cystalPointer=*team[mus1].getCystalPointer(chisoCystal)-1;
         if(*cystalPointer==0) {
-            cystalPointer=NULL;
             manager->deallocate(team[mus1].getCystalPointer(chisoCystal));
-            team[mus1].setCystalPointer(chisoCystal,cystalPointer);
+            team[mus1].setCystalPointer(chisoCystal,NULL);
         }
         else{
             team[mus1].setCystalPointer(chisoCystal,cystalPointer);
         }
     }
     else{
-        if(this->team[mus2].getCystalPointer(chisoCystal)!=NULL && !pause[mus2]){ //Neu mus2 co cystal thich hop va khong nghi ngoi
+        if(this->team[mus2].getCystalPointer(chisoCystal)!=NULL && pause[mus2]==false){ //Neu mus2 co cystal thich hop va khong nghi ngoi
             helpMus(mus2,mus1,chisoCystal,dungChung); //mus 1 dung chung cystal cua mus2
             helpMus(mus2,preMus,chisoCystal,dungChung); //preMus dung chung cystal cua mus3
         }
         else {
-            if(this->team[mus3].getCystalPointer(chisoCystal)!=NULL && !pause[mus3]){ //Neu mus3 co cystal thich hop va khong nghi ngoi
+            if(this->team[mus3].getCystalPointer(chisoCystal)!=NULL && pause[mus3]==false){ //Neu mus3 co cystal thich hop va khong nghi ngoi
                 helpMus(mus3,mus1,chisoCystal,dungChung); //mus1 dung chung cystal cua mus3
                 helpMus(mus3,preMus,chisoCystal,dungChung); //preMus dung chung cystal cua mus3
             }
             else{
                 if(mus1!=3){
-                    if(-(event)%100==11){ //Neu doi thu la Quezacolt va 4 NLQ ko co cystal thich hop
+                    if((-(event))%100==11){ //Neu doi thu la Quezacolt va 4 NLQ ko co cystal thich hop
                         pause[mus1]=true; //NLQ bi te liet
                     }
                     else{
@@ -197,7 +196,7 @@ void Musketeer::help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],in
                     }
                 }
                 else{
-                    if(!timCystal(chisoCystal,HP)){
+                    if(timCystal(chisoCystal,HP)==false){
                         int dam ,hp;
                         dam = (int)(-event*chisoQuai+(int)(luyThua(chisoQuai,mus1+1)*sntNhoHon(-event))%100);
                         hp=this->team[mus1].getHP()-dam;//HP bi giam 1 luong dam
@@ -246,7 +245,7 @@ void Musketeer::attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],
                     }
                     else{
                         if(preMus!=3){
-                            if(-(event)%100==11){ //Neu doi thu la Quezacolt va 4 NLQ ko co cystal thich hop
+                            if((-(event))%100==11){ //Neu doi thu la Quezacolt va 4 NLQ ko co cystal thich hop
                                 pause[preMus]=true; //NLQ bi te liet
                             }
                             else{
