@@ -209,9 +209,8 @@ void Musketeer::helpMus(int giup,int duocGiup,int chisoCystal,bool dungChung[4][
     int* cystalPointer;
     *cystalPointer=*team[giup].getCystalPointer(chisoCystal)-1; //Dung 1 cystal de chien dau
     if(*cystalPointer==0) {
-        cystalPointer=NULL;
         manager->deallocate(team[giup].getCystalPointer(chisoCystal)); //Huy vung nho neu level cystal = 0
-        team[giup].setCystalPointer(chisoCystal,cystalPointer);
+        team[giup].setCystalPointer(chisoCystal,NULL);
     }
     else {
         team[duocGiup].setCystalPointer(chisoCystal, cystalPointer); //Dung chung so cystal con lai
