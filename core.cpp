@@ -275,12 +275,10 @@ void Musketeer::attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],
                                 team[3].setHP(HP[3]);
                             }
                         }          
-                    }
-                        
+                    }        
                 }
             }
-        }
-        
+        }    
     }
 }
 

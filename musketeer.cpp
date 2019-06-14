@@ -166,22 +166,22 @@ void Musketeer::thayCystal(int cystal,int preMus,int chisoCystal,bool dungChung[
 
 
 bool Musketeer::timCystal(int chisoCystal,int HP[4]){
-    if(*(team[3].getCystalPointer(1))>1 || *(team[3].getCystalPointer(2))>1 || *(team[3].getCystalPointer(3))>1){
+    if(team[3].getCystalPointer(1)!=NULL || team[3].getCystalPointer(2)!=NULL || team[3].getCystalPointer(3)!=NULL){
         if(tim(chisoCystal,HP,3)){ //Tim thay
             return true;
         }
     }
-    if(*(team[0].getCystalPointer(1))>1 || *(team[0].getCystalPointer(2))>1 || *(team[0].getCystalPointer(3))>1){
+    if(team[0].getCystalPointer(1)!=NULL || team[0].getCystalPointer(2)!=NULL || team[0].getCystalPointer(3)!=NULL){
         if(tim(chisoCystal,HP,0)){ //Tim thay
             return true;
         }
     }
-    if(*(team[1].getCystalPointer(1))>1 || *(team[1].getCystalPointer(2))>1 || *(team[1].getCystalPointer(3))>1){
+    if(team[1].getCystalPointer(1)!=NULL || team[1].getCystalPointer(2)!=NULL || team[1].getCystalPointer(3)!=NULL){
         if(tim(chisoCystal,HP,1)){ //Tim thay
             return true;
         }
     }
-    if(*(team[2].getCystalPointer(1))>1 || *(team[2].getCystalPointer(2))>1 || *(team[2].getCystalPointer(3))>1){
+    if(team[2].getCystalPointer(1)!=NULL || team[2].getCystalPointer(2)!=NULL || team[2].getCystalPointer(3)!=NULL){
         if(tim(chisoCystal,HP,2)){ //Tim thay
             return true;
         }
@@ -191,15 +191,17 @@ bool Musketeer::timCystal(int chisoCystal,int HP[4]){
 
 bool Musketeer::tim(int chisoCystal,int HP[4],int NLQ){ //Tim xem NLQ (co chi so NLQ) co cystal de doi thanh cystal thich hop ko
     for(int i=1;i<4;i++){
-        if(*(team[NLQ].getCystalPointer(i))>1 && (*(team[3].getCystalPointer(i)))*10<HP[3]){
-            HP[NLQ]=HP[NLQ]-(*(team[NLQ].getCystalPointer(i)))*10;
-            int* cystalPointer;
-            manager->allocate(cystalPointer);
-            *cystalPointer=*team[NLQ].getCystalPointer(i)-1;
-            team[3].setCystalPointer(chisoCystal, cystalPointer);
-            manager->deallocate(team[NLQ].getCystalPointer(i));
-            team[NLQ].setCystalPointer(chisoCystal,NULL);
-            return true;
+        if(team[NLQ].getCystalPointer(i)!=NULL){
+            if(*(team[NLQ].getCystalPointer(i))>1 && (*(team[3].getCystalPointer(i)))*10<HP[3]){
+                HP[NLQ]=HP[NLQ]-(*(team[NLQ].getCystalPointer(i)))*10;
+                int* cystalPointer;
+                manager->allocate(cystalPointer);
+                *cystalPointer=*team[NLQ].getCystalPointer(i)-1;
+                team[3].setCystalPointer(chisoCystal, cystalPointer);
+                manager->deallocate(team[NLQ].getCystalPointer(i));
+                team[NLQ].setCystalPointer(chisoCystal,NULL);
+                return true;
+            }
         }
     }
     return false;
