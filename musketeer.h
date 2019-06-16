@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string.h>
+#include <math.h>
 using namespace std;
 
 /* Start block: DO NOT CHANGE
@@ -48,7 +49,7 @@ class Musketeer {
     * You can declare additional methods to complete this assignment
     
 */
-        void helpMus(int giup,int duocGiup,int quai,bool dungChung[4][3]);
+        void muonNgoc(int giup,int duocGiup,int quai,bool dungChung[4][3]);
         void help(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4],bool dungChung[4][3]);
         void attack(int preMus,int chisoCystal,float chisoQuai,bool pause[4],int event,int HP[4],bool dungChung[4][3]);
         bool timCystal(int chisoCystal,int HP[4]);
